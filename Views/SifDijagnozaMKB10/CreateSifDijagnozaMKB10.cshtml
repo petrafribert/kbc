@@ -1,0 +1,21 @@
+@model SifDijagnozaMKB10
+
+@{
+    ViewBag.Title = "Stvaranje nove dijagnoze";
+}
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="mkb10"></label>
+        <input asp-for="mkb10" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Dijagnoza"></label>
+        <input asp-for="Dijagnoza" class="form-control" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-secondary">Odustani</a>
+    </div>
+</form>

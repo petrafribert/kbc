@@ -1,0 +1,80 @@
+﻿@model DijagnozeViewModel
+
+@{
+    ViewData["Title"] = "Popis MKB10 šifri";
+}
+
+<div>
+    <form asp-action="Index" method="post"
+          asp-route-search="@Model.search"
+          asp-route-page="@Model.PagingInfo.CurrentPage"
+          asp-route-sort="@Model.PagingInfo.Sort"
+          asp-route-ascending="@Model.PagingInfo.Ascending">
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <label asp-for="search">Pretraživanje</label>
+            <input asp-for="search" class="form-control"/>
+        </div>
+        <div class="button-group">
+            <button class="btn btn-primary" type="submit">Traži</button>
+
+            <a asp-action="Create" class="right" style="float: right;">
+                <i class="fas fa-plus"></i>
+            </a>
+        </div>
+    </form>
+</div>
+<br/>
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+    <tr>
+        <th>
+            <a asp-route-sort="1"
+               asp-route-page="@Model.PagingInfo.CurrentPage"
+               asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)">
+                CPV
+            </a>
+        </th>
+        <th>
+            <a asp-route-sort="2"
+               asp-route-page="@Model.PagingInfo.CurrentPage"
+               asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending : true)">
+                Naziv
+            </a>
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var dijagnoza in Model.Dijagnoze)
+    {
+        <tr>
+            <td class="text-left">@dijagnoza.mkb10</td>
+            <td class="text-left">@dijagnoza.Dijagnoza</td>
+            <td class="btn-group">
+                <a asp-action="Edit"
+                   asp-route-MKB10="@dijagnoza.mkb10"
+                   asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-sort="@Model.PagingInfo.Sort"
+                   asp-route-ascending="@Model.PagingInfo.Ascending"
+                   class="btn btn-sm" title="Ažuriraj">
+                    <i class="fas fa-edit"></i>
+                </a>
+
+                <form asp-action="Delete" method="post"
+                      asp-route-MKB10="@dijagnoza.mkb10"
+                      asp-route-page="@Model.PagingInfo.CurrentPage"
+                      asp-route-sort="@Model.PagingInfo.Sort"
+                      asp-route-ascending="@Model.PagingInfo.Ascending">
+                    <input type="hidden" name="cpv" value="@dijagnoza.Dijagnoza"/>
+                    <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

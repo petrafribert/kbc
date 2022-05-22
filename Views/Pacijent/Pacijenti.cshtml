@@ -1,0 +1,133 @@
+﻿@model PacijentiViewModel
+
+@{
+    ViewData["Title"] = "Pacijenti";
+}
+
+<div>
+    <form asp-action="Index2" method="post">
+        <div asp-validation-summary="All"></div>
+        <div class="form-group">
+            <label asp-for="search">Pretraživanje</label>
+            <input asp-for="search" class="form-control"/>
+        </div>
+        <div class="button-group">
+            <button class="btn btn-primary" type="submit">Traži</button>
+
+            <a asp-action="Create" class="right" style="float: right;">
+                <i class="fas fa-plus"></i>
+            </a>
+        </div>
+    </form>
+</div>
+<br/>
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+    <tr>
+        @{
+            string[] nazivi = { "MBO", "Ime", "Prezime", "Datum rođenja", "" };
+            for (int i = 1; i <= nazivi.Length; i++)
+            {
+                <th>
+                    <a asp-route-sort="@i"
+                       asp-route-page="@Model.PagingInfo.CurrentPage"
+                       asp-route-ascending="@(Model.PagingInfo.Sort == i ? !Model.PagingInfo.Ascending : true)">
+                        @nazivi[i - 1]
+                        @if (@Model.PagingInfo.Sort == i && @Model.PagingInfo.Ascending)
+                        {
+                            <i class="fas fa-sort-alpha-up"></i>
+                        }
+                        @if (@Model.PagingInfo.Sort == i && !@Model.PagingInfo.Ascending)
+                        {
+                            <i class="fas fa-sort-alpha-down"></i>
+                        }
+                    </a>
+                </th>
+            }
+        }
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var pacijent in Model.Pacijenti)
+    {
+        <tr>
+            <td class="text-left">
+                <a asp-action="PovijestPregleda"
+                   asp-route-MBO="@pacijent.MBO"
+                   asp-route-Id="@pacijent.MBO">
+                    @pacijent.MBO
+                </a>
+            </td>
+            <td class="text-left">@pacijent.Ime</td>
+            <td class="text-left">@pacijent.Prezime</td>
+            <td class="text-left">@pacijent.DatumRodjenja.ToShortDateString()</td>
+
+
+            <td class="btn-group">
+                <a asp-action="Edit"
+                   asp-route-id="@pacijent.MBO"
+                   asp-route-MBO="@pacijent.MBO"
+                   asp-route-page="@Model.PagingInfo.CurrentPage"
+                   asp-route-sort="@Model.PagingInfo.Sort"
+                   asp-route-ascending="@Model.PagingInfo.Ascending"
+                   class="btn btn-sm" title="Ažuriraj">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <form asp-action="Delete" method="POST"
+                      asp-route-page="@Model.PagingInfo.CurrentPage"
+                      asp-route-sort="@Model.PagingInfo.Sort"
+                      asp-route-ascending="@Model.PagingInfo.Ascending">
+                    <input type="hidden" name="MBO" value="@pacijent.MBO"/>
+                    <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        @if (Model.Pacijenti.Where(p => p.MBO == @pacijent.MBO).Single().PovijestiPregleda.Any())
+        {
+            <tr class="table-light">
+                <td></td>
+                <td class="text-left">Datum pregleda</td>
+                <td class="text-left">MKB10</td>
+                <td class="text-left">Anamneza</td>
+                <td class="text-left">Terapija</td>
+            </tr>
+        }
+
+        @foreach (var pregled in Model.Pacijenti.Where(p => p.MBO == @pacijent.MBO).Single().PovijestiPregleda)
+        {
+            <tr class="table-light">
+                <td></td>
+                <td class="text-left">@pregled.DatumPregleda.ToString(("yyyy-MM-dd"))</td>
+                <td class="text-left">@pregled.MKB10</td>
+                <td class="text-left">@pregled.Anamneza</td>
+                <td class="text-left">@pregled.Terapija</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+@if (@Model.PagingInfo.CurrentPage > 1)
+{
+    <a asp-action="Index2"
+       asp-route-page="@(Model.PagingInfo.CurrentPage - 1)"
+       asp-route-sort="@Model.PagingInfo.Sort"
+       asp-route-ascending="@Model.PagingInfo.Ascending"
+       class="btn btn-sm" title="Prethodna">
+        &laquo; Prethodna
+    </a>
+}
+@if (@Model.PagingInfo.CurrentPage < @Model.PagingInfo.TotalPages)
+{
+    <a asp-action="Index2"
+       asp-route-page="@(Model.PagingInfo.CurrentPage + 1)"
+       asp-route-sort="@Model.PagingInfo.Sort"
+       asp-route-ascending="@Model.PagingInfo.Ascending"
+       class="btn btn-sm" title="Sljedeća">
+        Sljedeća &raquo;
+    </a>
+}

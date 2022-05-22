@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Pregledi</title>
+    <link
+            href="lib/jqueryui/themes/base/jquery-ui.min.css"
+            rel="stylesheet"
+            type="text/css"
+    />
+    <link
+            href="lib/jtable/lib/themes/lightcolor/blue/jtable.min.css"
+            rel="stylesheet"
+            type="text/css"
+    />
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12" id="pregledi"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="lib/jqueryui/jquery-ui.min.js"></script>
+<script
+        type="text/javascript"
+        src="lib/jtable/lib/jquery.jtable.min.js"
+></script>
+<script
+        type="text/javascript"
+        src="lib/jtable/lib/localization/jquery.jtable.hr.js"
+></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#pregledi").jtable({
+            title: "Popis pregleda",
+            paging: true,
+            pageSize: 5,
+            sorting: true,
+            defaultSorting: "Id ASC",
+            actions: {
+                listAction: "jtable/pregledi/getall",
+                createAction: "jtable/pregledi/create",
+                updateAction: "jtable/pregledi/update",
+                deleteAction: "jtable/pregledi/delete",
+            },
+            fields: {
+                Id: {
+                    create: false,
+                    key: true,
+                    list: true,
+                    title: "Id pregleda",
+                },
+                DatumUpisa: {
+                    title: "Datum Upisa",
+                    width: "20%",
+                },
+                Anamneza: {
+                    title: "Anamneza",
+                    width: "30%",
+                },
+                MBO: {
+                    title: "Pacijent",
+                    width: "10%",
+                },
+                MKB10: {
+                    title: "Dijagnoza",
+                    width: "10%",
+                },
+            },
+        });
+
+        $("#pregledi").jtable("load");
+    });
+</script>
+</body>
+</html>

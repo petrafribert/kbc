@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Pacijenti</title>
+    <link
+            href="lib/jqueryui/themes/base/jquery-ui.min.css"
+            rel="stylesheet"
+            type="text/css"
+    />
+    <link
+            href="lib/jtable/lib/themes/lightcolor/blue/jtable.min.css"
+            rel="stylesheet"
+            type="text/css"
+    />
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12" id="pacijenti"></div>
+    </div>
+</div>
+
+<script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="lib/jqueryui/jquery-ui.min.js"></script>
+<script
+        type="text/javascript"
+        src="lib/jtable/lib/jquery.jtable.min.js"
+></script>
+<script
+        type="text/javascript"
+        src="lib/jtable/lib/localization/jquery.jtable.hr.js"
+></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#pacijenti").jtable({
+            title: "Popis pacijenata",
+            paging: true,
+            pageSize: 10,
+            sorting: true,
+            defaultSorting: "Id ASC",
+            actions: {
+                listAction: "jtable/pacijent/getall",
+                createAction: "jtable/pacijent/create",
+                updateAction: "jtable/pacijent/update",
+                deleteAction: "jtable/pacijent/delete",
+            },
+            fields: {
+                MBO: {
+                    // create: false,
+                    key: true,
+                    list: true,
+                    title: "MBO",
+                },
+                Ime: {
+                    title: "Ime",
+                    width: "20%",
+                },
+                Prezime: {
+                    title: "Prezime",
+                    width: "30%",
+                },
+                DatumRodjenja: {
+                    title: "Datum rođenja",
+                    width: "10%",
+                }
+            },
+        });
+
+        $("#pacijenti").jtable("load");
+    });
+</script>
+</body>
+</html>

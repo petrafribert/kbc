@@ -1,0 +1,53 @@
+﻿@model Pregled
+
+@{
+    ViewBag.Title = "Stvaranje novog pregleda";
+}
+
+<form asp-action="Create"
+      method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="DatumPregleda"></label>
+        <div>
+            <span asp-validation-for="DatumPregleda" class="text-danger"></span>
+        </div>
+        <input asp-for="DatumPregleda" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Anamneza"></label>
+        <div>
+            <span asp-validation-for="Anamneza" class="text-danger"></span>
+        </div>
+        <input asp-for="Anamneza" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Terapija"></label>
+        <div>
+            <span asp-validation-for="Terapija" class="text-danger"></span>
+        </div>
+        <input asp-for="Terapija" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="DijagnozaMkb10"></label>
+        <div>
+            <span asp-validation-for="DijagnozaMkb10" class="text-danger"></span>
+        </div>
+        <select class="form-control" asp-for="DijagnozaMkb10" asp-items="ViewBag.Dijagnoze">
+            <option selected value="" disabled>Odaberite dijagnozu</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="PacijentMbo"></label>
+        <div>
+            <span asp-validation-for="PacijentMbo" class="text-danger"></span>
+        </div>
+        <select class="form-control" asp-for="PacijentMbo" asp-items="ViewBag.Pacijenti">
+            <option selected value="" disabled>Odaberite pacijenta</option>
+        </select>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <button class="btn btn-secondary" onclick="history.go(-1);return false;">Odustani</button>
+    </div>
+</form>

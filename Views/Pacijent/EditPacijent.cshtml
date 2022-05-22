@@ -1,0 +1,45 @@
+﻿@model Pacijent
+
+@{
+    ViewBag.Title = "Ažuriranje pacijenta";
+}
+
+<form asp-route-page="@ViewBag.Page"
+      asp-route-sort="@ViewBag.Sort"
+      asp-route-ascending="@ViewBag.Ascending"
+      asp-route-MBO="@Model.MBO"
+      asp-action="Edit"
+      method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Ime"></label>
+        <div>
+            <span asp-validation-for="Ime" class="text-danger"></span>
+        </div>
+        <input asp-for="Ime" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Prezime"></label>
+        <div>
+            <span asp-validation-for="Prezime" class="text-danger"></span>
+        </div>
+        <input asp-for="Prezime" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="DatumRodjenja"></label>
+        <div>
+            <span asp-validation-for="DatumRodjenja" class="text-danger"></span>
+        </div>
+        <input asp-for="DatumRodjenja" type="date" value="@Model.DatumRodjenja.ToString("yyyy-MM-dd")" class="form-control"/>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Spremi</button>
+        <a asp-action="Index2"
+           asp-route-page="@ViewBag.Page"
+           asp-route-sort="@ViewBag.Sort"
+           asp-route-ascending="@ViewBag.Ascending"
+           class="btn btn-secondary">
+            Odustani
+        </a>
+    </div>
+</form>

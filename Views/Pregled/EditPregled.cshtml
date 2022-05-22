@@ -1,0 +1,63 @@
+﻿@model Pregled
+
+@{
+    ViewBag.Title = "Ažuriranje pregleda";
+}
+
+<form asp-route-Id="@Model.Id"
+      asp-route-page="@ViewBag.Page"
+      asp-route-sort="@ViewBag.Sort"
+      asp-route-ascending="@ViewBag.Ascending"
+      asp-action="Update"
+      method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="DatumPregleda"></label>
+        <div>
+            <span asp-validation-for="DatumPregleda" class="text-danger"></span>
+        </div>
+        <input asp-for="DatumPregleda" type="date" value="@Model.DatumPregleda.ToString("yyyy-MM-dd")" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Anamneza"></label>
+        <div>
+            <span asp-validation-for="Anamneza" class="text-danger"></span>
+        </div>
+        <input asp-for="Anamneza" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Terapija"></label>
+        <div>
+            <span asp-validation-for="Terapija" class="text-danger"></span>
+        </div>
+        <input asp-for="Terapija" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="PacijentMbo"></label>
+        <div>
+            <span asp-validation-for="PacijentMbo" class="text-danger"></span>
+        </div>
+        <select class="form-control" asp-for="PacijentMbo" asp-items="ViewBag.Pacijenti">
+            <option selected value="@Model.PacijentMbo" disabled>Odaberite pacijenta</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="DijagnozaMkb10"></label>
+        <div>
+            <span asp-validation-for="DijagnozaMkb10" class="text-danger"></span>
+        </div>
+        <select class="form-control" asp-for="DijagnozaMkb10" asp-items="ViewBag.Dijagnoze">
+            <option selected value="@Model.DijagnozaMkb10" disabled>Odaberite dijagnozu</option>
+        </select>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Spremi</button>
+        <a asp-action="Index"
+           asp-route-page="@ViewBag.Page"
+           asp-route-sort="@ViewBag.Sort"
+           asp-route-ascending="@ViewBag.Ascending"
+           class="btn btn-secondary">
+            Odustani
+        </a>
+    </div>
+</form>

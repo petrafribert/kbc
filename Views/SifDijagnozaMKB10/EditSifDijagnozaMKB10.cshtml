@@ -1,0 +1,31 @@
+@model SifDijagnozaMKB10
+
+@{
+    ViewBag.Title = "Ažuriranje MKB10 dijagnoze";
+}
+
+<form asp-route-page="@ViewBag.Page"
+      asp-route-sort="@ViewBag.Sort"
+      asp-route-ascending="@ViewBag.Ascending"
+      asp-action="Edit"
+      method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="mkb10"></label>
+        <div><span asp-validation-for="mkb10" class="text-danger"></span></div>
+        <input asp-for="mkb10" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Dijagnoza"></label>
+        <div><span asp-validation-for="Dijagnoza" class="text-danger"></span></div>
+        <input asp-for="Dijagnoza" class="form-control" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Spremi</button>
+        <a asp-action="Index"
+           asp-route-page="@ViewBag.Page"
+           asp-route-sort="@ViewBag.Sort"
+           asp-route-ascending="@ViewBag.Ascending"
+           class="btn btn-secondary">Odustani</a>
+    </div>
+</form>

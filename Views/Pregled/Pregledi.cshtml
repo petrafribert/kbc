@@ -1,0 +1,81 @@
+﻿@model PreglediViewModel
+
+@{
+    ViewData["Title"] = "Pregledi";
+}
+
+<a asp-action="Create"
+   asp-controller="Pregled">
+    <i class="fas fa-plus"></i>
+</a>
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+    <tr>
+        @{
+            string[] nazivi = { "Id", "MBO", "Datum pregleda", "Anamneza", "Terapija", "MKB10" };
+            for (int i = 1; i <= nazivi.Length; i++)
+            {
+                <th>
+                    <a asp-route-sort="@i"
+                       asp-route-page="@Model.PagingInfo.CurrentPage"
+                       asp-route-ascending="@(Model.PagingInfo.Sort == i ? !Model.PagingInfo.Ascending : true)">
+                        @nazivi[i - 1]
+                        @if (@Model.PagingInfo.Sort == i && @Model.PagingInfo.Ascending)
+                        {
+                            <i class="fas fa-sort-alpha-up"></i>
+                        }
+                        @if (@Model.PagingInfo.Sort == i && !@Model.PagingInfo.Ascending)
+                        {
+                            <i class="fas fa-sort-alpha-down"></i>
+                        }
+                    </a>
+                </th>
+            }
+        }
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var pregled in Model.PovijestiPregleda)
+    {
+        <tr>
+            <td class="text-left col-sm-1">
+                @pregled.Id
+            </td>
+            <td class="text-left col-sm-2">
+                @pregled.MBO
+            </td>
+            <td class="text-left col-sm-3">
+                @pregled.DatumPregleda.ToShortDateString()
+            </td>
+            <td class="text-left col-sm-4">
+                @pregled.Anamneza
+            </td>
+            <td class="text-left col-sm-3">
+                @pregled.Terapija
+            </td>
+            <td class="text-left col-sm-2">
+                @pregled.MKB10
+            </td>
+            <td class="btn-group">
+                <a asp-action="Edit"
+                   asp-route-Id="@pregled.Id"
+                   asp-controller="Pregled"
+                   class="btn btn-sm" title="Ažuriraj">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <form asp-action="Delete" method="POST"
+                      asp-route-Id="@pregled.Id"
+                      asp-controller="Pregled">
+                    <input type="hidden" name="MBO" value="@pregled.Id"/>
+                    <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

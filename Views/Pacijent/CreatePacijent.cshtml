@@ -1,0 +1,29 @@
+﻿@model Pacijent
+
+@{
+    ViewBag.Title = "Stvaranje novog pacijenta";
+}
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Ime"></label>
+        <input asp-for="Ime" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="Prezime"></label>
+        <input asp-for="Prezime" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="MBO"></label>
+        <input asp-for="MBO" class="form-control" maxlength="9" type="text"/>
+    </div>
+    <div class="form-group">
+        <label asp-for="DatumRodjenja"></label>
+        <input asp-for="DatumRodjenja" class="form-control" type="date" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index2" class="btn btn-secondary">Odustani</a>
+    </div>
+</form>
