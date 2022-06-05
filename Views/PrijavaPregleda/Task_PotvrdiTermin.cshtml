@@ -1,0 +1,12 @@
+@model TaskInfo
+<td>
+    <form asp-action="@nameof(PrijavaPregledaController.PotvrdiTermin)" method="post">
+        <select class="form-control" name="odluka">
+            <option disabled selected value=""></option>
+            <option value="DA">DA</option>
+            <option value="NE">NE</option>
+        </select>
+        <input type="hidden" name="taskId" value="@Model.TID" />
+        <input type="submit" class="btn btn-sm btn-primary" value="Prihvati" />
+    </form>
+</td>

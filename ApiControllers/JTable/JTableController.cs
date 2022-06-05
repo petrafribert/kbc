@@ -1,15 +1,20 @@
-﻿using System.Threading.Tasks;
+﻿#pragma warning disable CS1591
+
+using System.Threading.Tasks;
 using KBC.Util;
 using KBC.ViewModels;
 using KBC.ViewModels.JTable;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KBC.ApiControllers.JTable {
+namespace KBC.ApiControllers.JTable
+{
     [ApiExplorerSettings(IgnoreApi = true)]
-    public abstract class JTableController<TController, TKey, TModel> : ControllerBase where TController : ICustomController<TKey, TModel> {
+    public abstract class JTableController<TController, TKey, TModel> : ControllerBase where TController : ICustomController<TKey, TModel>
+    {
         private readonly TController controller;
 
-        public JTableController(TController controller) {
+        public JTableController(TController controller)
+        {
             this.controller = controller;
         }
 
@@ -20,7 +25,8 @@ namespace KBC.ApiControllers.JTable {
         /// <param name="search"></param>
         /// <returns></returns>
         [HttpPost]
-        public virtual async Task<TableRecords<TModel>> GetAll([FromQuery] LoadParams loadParams, [FromForm] string search) {
+        public virtual async Task<TableRecords<TModel>> GetAll([FromQuery] LoadParams loadParams, [FromForm] string search)
+        {
             int count = await controller.Count(search);
             loadParams.Filter = search;
             var list = await controller.GetAll(loadParams);
@@ -28,43 +34,61 @@ namespace KBC.ApiControllers.JTable {
         }
 
         [HttpPost]
-        public virtual async Task<JTableAjaxResult> Create([FromForm] TModel model) {
-            if (model == null) {
+        public virtual async Task<JTableAjaxResult> Create([FromForm] TModel model)
+        {
+            if (model == null)
+            {
                 return JTableAjaxResult.Error("Model is null");
-            } else if (!ModelState.IsValid) {
+            }
+            else if (!ModelState.IsValid)
+            {
                 return JTableAjaxResult.Error(ModelState.GetErrorsString());
             }
 
             var result = await controller.Create(model);
-            if (result is CreatedAtActionResult created) {
+            if (result is CreatedAtActionResult created)
+            {
                 return new CreateResult(created.Value);
-            } else {
+            }
+            else
+            {
                 return JTableAjaxResult.Error(result.ToString());
             }
         }
 
-        protected async Task<JTableAjaxResult> UpdateItem(TKey id, TModel model) {
+        protected async Task<JTableAjaxResult> UpdateItem(TKey id, TModel model)
+        {
 
-            if (model == null) {
+            if (model == null)
+            {
                 return JTableAjaxResult.Error("Model is null");
-            } else if (!ModelState.IsValid) {
+            }
+            else if (!ModelState.IsValid)
+            {
                 return JTableAjaxResult.Error(ModelState.GetErrorsString());
             }
 
 
             var result = await controller.Update(id, model);
-            if (result is NoContentResult) {
+            if (result is NoContentResult)
+            {
                 return JTableAjaxResult.OK;
-            } else {
+            }
+            else
+            {
                 return JTableAjaxResult.Error("Not found");
             }
         }
 
-        protected async Task<JTableAjaxResult> DeleteItem(TKey id) {
+        protected async Task<JTableAjaxResult> DeleteItem(TKey id)
+        {
             var result = await controller.Delete(id);
-            if (result is NoContentResult) {
+            if (result is NoContentResult)
+            {
                 return JTableAjaxResult.OK;
-            } else {
+            }
+            else
+            {
                 return JTableAjaxResult.Error("Not found");
             }
         }

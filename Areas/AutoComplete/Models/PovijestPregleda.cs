@@ -1,9 +1,12 @@
-﻿using System.Text.Json.Serialization;
+﻿#pragma warning disable CS1591
+
+using System.Text.Json.Serialization;
 
 namespace KBC.Areas.AutoComplete.Models
 {
     public class PovijestPregleda
     {
+
         [JsonPropertyName("label")] public string Label { get; set; }
         [JsonPropertyName("id")] public int Id { get; set; }
 

@@ -1,0 +1,45 @@
+@model IEnumerable<TaskInfo>
+
+<table class="table-striped table-bordered dashboard">
+    <h5>Moji zadaci</h5>
+    <thead>
+    <tr>
+        <th scope="col">PID</th>
+        <th scope="col">ID Zadatka</th>
+        <th scope="col">Vrsta zadatke</th>
+        <th scope="col">MBO</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var info in Model)
+    {
+        <tr>
+            <td>@info.PID</td>
+            <td>@info.TID</td>
+            <td>@info.TaskName</td>
+            <td>@info.MBO</td>
+            @switch (info.TaskKey)
+            {
+                case "Task_DodijeliDoktora":
+                case "Task_PonudiTermin":
+                case "Task_PotvrdiTermin":
+                    <partial name="@info.TaskKey" model="info"/>
+                    break;
+                default:
+                    <td>
+                        <form asp-action="ZavrsiPrijavu"
+                              asp-route-taskId="@info.TID"
+                              method="post">
+                            <input type="hidden" name="taskId" value="@info.TID"/>
+                            <label for="datum"></label>
+                            <input type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-control" name="datum"/>
+                            <input type="submit" class="btn btn-primary btn-sm" value="Dodijeli termin"/>
+                        </form>
+                    </td>
+                    break;
+            }
+        </tr>
+    }
+    </tbody>
+</table>

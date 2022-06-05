@@ -1,0 +1,12 @@
+@{
+    ViewData["Title"] = "Prijava pregleda";
+}
+
+<div class="container">
+    <h4>Stvori novu prijavu za pregled</h4>
+    <form asp-action="Start" method="post">
+        <label for="MBO">Unesi MBO</label>
+        <input type="text" name="MBO"/>
+        <input type="submit" class="btn btn-sm btn-primary" value="Prijavi pregled" />
+    </form>
+</div>

@@ -1,0 +1,9 @@
+@model TaskInfo
+<td>
+    <form asp-action="ZavrsiPrijavu" asp-route-taskId="@Model.TID" method="post">
+        <input type="hidden" name="taskId" value="@Model.TID"/>
+        <label for="datum">Datum: </label>
+        <input type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" name="datum" class="form-control"/>
+        <input type="submit" class="btn btn-primary btn-sm" value="Dodijeli termin"/>
+    </form>
+</td>

@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿#pragma warning disable CS1591
+
+using System.Threading.Tasks;
 using KBC.ViewModels;
 using KBC.ViewModels.JTable;
 using Microsoft.AspNetCore.Mvc;

@@ -1,0 +1,29 @@
+@model IEnumerable<TaskInfo>
+
+<table class="table-striped table-bordered dashboard">
+    <h5>Pregledi s ponuđenim terminom</h5>
+    <thead>
+    <tr>
+        <th scope="col">PID</th>
+        <th scope="col">MBO</th>
+        <th scope="col">Doktor</th>
+        <th scope="col">DatumPregleda</th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model != null)
+    {
+        @foreach (var info in Model)
+        {
+            <tr>
+                <td>@info.PID</td>
+                <td>@info.MBO</td>
+                <td>@info.Doktor</td>
+                <td>@info.DatumPregleda</td>
+                <partial name="Task_PotvrdiTermin" model="info"/>
+            </tr>
+        }
+    }
+
+    </tbody>
+</table>

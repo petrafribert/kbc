@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -16,7 +18,7 @@ namespace KBC.Model
 
         [Display(Name = "MBO pacijenta", Prompt = "Unesite MBO pacijenta")]
         [Required(ErrorMessage = "MBO pacijenta je obavezno polje")]
-        [Range(100000000,999999999, ErrorMessage = "MBO pacijenta mora biti duljine 9")]
+        [Range(100000000, 999999999, ErrorMessage = "MBO pacijenta mora biti duljine 9")]
         public int MBO { get; set; }
 
         [Display(Name = "Ime pacijenta", Prompt = "Unesite ime pacijenta")]
@@ -35,7 +37,7 @@ namespace KBC.Model
         public DateTime DatumRodjenja { get; set; }
 
         public virtual ICollection<Pregled> PovijestPregledas { get; set; }
-        
-        
+
+
     }
 }

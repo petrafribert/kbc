@@ -1,4 +1,5 @@
-﻿
+﻿#pragma warning disable CS1591
+
 
 #nullable disable
 
@@ -27,15 +28,15 @@ namespace KBC.Model
 
         [Display(Name = "Matični broj osiguranika", Prompt = "Odaberite matični broj osiguranika")]
         [Required(ErrorMessage = "Matični broj osiguranika je obvezno polje")]
-        [Range(100000000,999999999, ErrorMessage = "MBO pacijenta mora biti duljine 9")]
+        [Range(100000000, 999999999, ErrorMessage = "MBO pacijenta mora biti duljine 9")]
         public int PacijentMbo { get; set; }
 
         [Display(Name = "Šifra dijagnoze", Prompt = "Odaberite šifru dijagnoze")]
-        // [Required(ErrorMessage = "Šifra dijagnoze je obvezno polje")]
+        [Required(ErrorMessage = "Šifra dijagnoze je obvezno polje")]
         public string DijagnozaMkb10 { get; set; }
 
         public virtual Pacijent Pacijent { get; set; }
-        
+
         public virtual SifDijagnozaMKB10 Dijagnoza { get; set; }
     }
 }

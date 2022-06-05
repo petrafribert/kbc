@@ -91,3 +91,24 @@
     }
     </tbody>
 </table>
+
+@if (@Model.PagingInfo.CurrentPage > 1)
+{
+    <a asp-action="PovijestPregleda"
+       asp-route-page="@(Model.PagingInfo.CurrentPage - 1)"
+       asp-route-sort="@Model.PagingInfo.Sort"
+       asp-route-ascending="@Model.PagingInfo.Ascending"
+       class="btn btn-sm" title="Prethodna">
+        &laquo; Prethodna
+    </a>
+}
+@if (@Model.PagingInfo.CurrentPage < @Model.PagingInfo.TotalPages)
+{
+    <a asp-action="PovijestPregleda"
+       asp-route-page="@(Model.PagingInfo.CurrentPage + 1)"
+       asp-route-sort="@Model.PagingInfo.Sort"
+       asp-route-ascending="@Model.PagingInfo.Ascending"
+       class="btn btn-sm" title="Sljedeća">
+        Sljedeća &raquo;
+    </a>
+}

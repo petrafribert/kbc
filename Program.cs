@@ -1,3 +1,5 @@
+#pragma warning disable CS1591
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -5,7 +7,8 @@ using NLog.Web;
 
 namespace KBC
 {
-    public class Program {
+    public class Program
+    {
         public static void Main(string[] args)
         {
             var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();

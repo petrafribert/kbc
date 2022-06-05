@@ -26,4 +26,8 @@
     <Folder Include="ViewComponents\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Camunda.Api.Client" Version="2.6.0" />
+  </ItemGroup>
+
 </Project>

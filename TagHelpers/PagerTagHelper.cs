@@ -1,4 +1,6 @@
-﻿using KBC.ViewModels;
+﻿#pragma warning disable CS1591
+
+using KBC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;

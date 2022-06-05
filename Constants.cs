@@ -1,4 +1,6 @@
-﻿namespace KBC
+﻿#pragma warning disable CS1591
+
+namespace KBC
 {
     public class Constants
     {

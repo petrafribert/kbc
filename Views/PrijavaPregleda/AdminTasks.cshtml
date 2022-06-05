@@ -1,0 +1,33 @@
+@model IEnumerable<TaskInfo>
+
+<table class="table-striped table-bordered dashboard">
+  <h5>Dostupni zadatci za admina</h5>
+  <thead>
+    <tr>
+      <th scope="col">PID</th>
+      <th scope="col">Id Zadatka</th>
+      <th scope="col">Ime Zadatka</th>
+      <th scope="col">MBO</th>
+      <th scope="col">Datum Pregleda</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var info in Model)
+    {
+      <tr>
+        <td>@info.PID</td>
+        <td>@info.TID</td>
+        <td>@info.TaskName</td>
+        <td>@info.MBO</td>
+        <td>@info.DatumPregleda</td>
+        <td>
+          <form asp-action="@nameof(PrijavaPregledaController.PickTask)" method="post">
+            <input type="hidden" name="taskId" value="@info.TID" />
+            <input type="submit" class="btn btn-primary btn-sm" value="Dodijeli doktora" />
+          </form>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

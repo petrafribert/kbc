@@ -1,0 +1,12 @@
+@model TaskInfo
+<td>
+    <form asp-action="@nameof(PrijavaPregledaController.DodijeliDoktora)" method="post">
+        <select class="form-control" name="doktor">
+            <option disabled selected value=""></option>
+            <option value="petra">Petra</option>
+            <option value="patrik">Patrik</option>
+        </select>
+        <input type="hidden" name="taskId" value="@Model.TID" />
+        <input type="submit" class="btn btn-sm btn-primary" value="Dodijeli" />
+    </form>
+</td>

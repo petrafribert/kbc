@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#pragma warning disable CS1591
+
+using System.Collections.Generic;
 using KBC.Model;
 
 namespace KBC.ViewModels
@@ -7,7 +9,7 @@ namespace KBC.ViewModels
     {
         public IEnumerable<SifDijagnozaMKB10> Dijagnoze { get; set; }
         public PagingInfo PagingInfo { get; set; }
-        
+
         public string search { get; set; }
     }
 }

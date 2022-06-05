@@ -1,4 +1,6 @@
-﻿#nullable disable
+﻿#pragma warning disable CS1591
+
+#nullable disable
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +16,7 @@ namespace KBC.Model
         [Display(Name = "Dijagnoza", Prompt = "Unesite dijagnozu")]
         [Required(ErrorMessage = "Dijagnoza je obvezno polje")]
         public string Dijagnoza { get; set; }
-        
+
         public virtual ICollection<Pregled> PovijestPregledas { get; set; }
 
     }

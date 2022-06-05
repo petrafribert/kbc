@@ -1,3 +1,5 @@
+#pragma warning disable CS1591
+
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,15 +15,19 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace KBC {
-    public class Startup {
-        public Startup(IConfiguration configuration) {
+namespace KBC
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services) {
+        public void ConfigureServices(IServiceCollection services)
+        {
             services.AddControllersWithViews()
                     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>())
                     .AddJsonOptions(configure => configure.JsonSerializerOptions.PropertyNamingPolicy = null);
@@ -47,12 +53,14 @@ namespace KBC {
             services.AddTransient<ApiControllers.ApiPacijentController>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             string baseApiUrl = Configuration.GetSection("BaseApiUrl").Value;
 
-            if (env.IsDevelopment()) {
+            if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
             }
 
@@ -64,13 +72,14 @@ namespace KBC {
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{user}/{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapDefaultControllerRoute();
             });
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("swagger/v1/swagger.json", "KBC WebAPI");
                 c.RoutePrefix = String.Empty;
             });

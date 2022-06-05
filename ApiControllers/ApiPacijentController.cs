@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -70,7 +72,7 @@ namespace KBC.ApiControllers
 
             //ovo možda treba obrisati?
             var query = ctx.Pacijenti.AsQueryable();
-                // .Include(p => p.Ime + p.Prezime).AsQueryable();
+            // .Include(p => p.Ime + p.Prezime).AsQueryable();
             // if (!string.IsNullOrWhiteSpace(loadParams.Filter))
             // {
             //     query = query.Where(p => p.Ime.Contains(loadParams.Filter) || p.Prezime.Contains(loadParams.Filter));

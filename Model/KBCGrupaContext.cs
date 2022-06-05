@@ -1,4 +1,6 @@
-﻿#nullable disable
+﻿#pragma warning disable CS1591
+
+#nullable disable
 
 using Microsoft.EntityFrameworkCore;
 
@@ -17,16 +19,16 @@ namespace KBC.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+
             base.OnModelCreating(modelBuilder);
-            
+
             modelBuilder.Entity<Pacijent>(entity =>
             {
                 entity.HasKey("MBO")
                     .HasName("pacijent_pkey");
-                
+
                 entity.ToTable("pacijent");
-                
+
                 entity.Property(pacijent => pacijent.MBO)
                     .IsRequired()
                     .HasMaxLength(9)
@@ -50,7 +52,7 @@ namespace KBC.Model
 
             modelBuilder.Entity<SifDijagnozaMKB10>(entity =>
             {
-              
+
                 entity.ToTable("dijagnoza");
 
                 entity.HasKey("mkb10")
@@ -70,7 +72,7 @@ namespace KBC.Model
             modelBuilder.Entity<Pregled>(entity =>
             {
                 // entity.HasKey("id");
-                
+
                 entity.ToTable("pregled");
 
                 entity.Property(pregled => pregled.Id)
@@ -88,7 +90,7 @@ namespace KBC.Model
                 entity.Property(pregled => pregled.PacijentMbo)
                     .IsRequired()
                     .HasColumnName("mbo");
-                
+
                 entity.Property(pregled => pregled.DijagnozaMkb10)
                     // .IsRequired()
                     .HasColumnName("mkb10");

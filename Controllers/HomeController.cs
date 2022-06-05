@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿#pragma warning disable CS1591
+
+using System.Diagnostics;
 using KBC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

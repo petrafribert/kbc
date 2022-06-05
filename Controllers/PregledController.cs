@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -28,9 +30,9 @@ namespace KBC.Controllers
             PrepareDropDownLists();
             return View("CreatePregled");
         }
-        
+
         [HttpGet]
-        public IActionResult CreateWithPatient(int pacijent) 
+        public IActionResult CreateWithPatient(int pacijent)
         {
             PrepareDropDownLists();
             var pregled = new Pregled();
@@ -45,7 +47,7 @@ namespace KBC.Controllers
                 .Select(d => new { MBO = d.MBO, Ime = d.MBO + " " + d.Ime + " " + d.Prezime })
                 .ToList();
             ViewBag.Pacijenti = new SelectList(pacijenti, nameof(Pacijent.MBO), nameof(Pacijent.Ime));
-            
+
             var dijagnoze = ctx.SifDijagnozaMKB10
                 .OrderBy(d => d.mkb10)
                 .Select(d => new { d.mkb10, Dijagnoza = d.mkb10 + " - " + d.Dijagnoza })
@@ -96,7 +98,7 @@ namespace KBC.Controllers
                 var pregledView = new Pregled();
                 pregledView.PacijentMbo = pregled.PacijentMbo;
                 return View("CreatePregled", pregledView);
-                
+
             }
 
         }
@@ -129,7 +131,7 @@ namespace KBC.Controllers
             try
             {
                 Pregled povijest = await ctx.Pregledi.FindAsync(Id);
-                
+
                 if (povijest == null)
                 {
                     return NotFound($"Ne postoji povijest pregleda s oznakom {Id}");
@@ -137,7 +139,7 @@ namespace KBC.Controllers
                 ViewBag.Page = page;
                 ViewBag.Sort = sort;
                 ViewBag.Ascending = ascending;
-                bool ok = await TryUpdateModelAsync<Pregled>(povijest, "", d => d.Id, d => d.Anamneza, d => d.Terapija, d => d.DatumPregleda, 
+                bool ok = await TryUpdateModelAsync<Pregled>(povijest, "", d => d.Id, d => d.Anamneza, d => d.Terapija, d => d.DatumPregleda,
                             d => d.PacijentMbo, d => d.DijagnozaMkb10);
                 if (ok)
                 {

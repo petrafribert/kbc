@@ -1,4 +1,6 @@
-﻿namespace KBC.ViewModels.JTable
+﻿#pragma warning disable CS1591
+
+namespace KBC.ViewModels.JTable
 {
     public class CreateResult : JTableAjaxResult
     {

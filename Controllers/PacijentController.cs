@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -103,7 +105,7 @@ namespace KBC.Controllers
                 ViewBag.Page = page;
                 ViewBag.Sort = sort;
                 ViewBag.Ascending = ascending;
-                bool ok = await TryUpdateModelAsync<Pacijent>(pacijent, "", d => d.Ime, d => d.MBO, d=> d.Prezime, d => d.DatumRodjenja);
+                bool ok = await TryUpdateModelAsync<Pacijent>(pacijent, "", d => d.Ime, d => d.MBO, d => d.Prezime, d => d.DatumRodjenja);
                 if (ok)
                 {
                     try
@@ -320,7 +322,7 @@ namespace KBC.Controllers
             ViewBag.Page = page;
             ViewBag.Sort = sort;
             ViewBag.Ascending = ascending;
-            
+
             int pagesize = _appSettings.PageSize;
 
 
@@ -353,7 +355,7 @@ namespace KBC.Controllers
                         MKB10 = o.DijagnozaMkb10
                     })
                     .ToList();
-                
+
                 int count = povijestiPregleda.Count;
 
                 var pagingInfo = new PagingInfo
@@ -364,7 +366,7 @@ namespace KBC.Controllers
                     ItemsPerPage = pagesize,
                     TotalItems = count
                 };
-                
+
                 var pregledi = new PacijentPreglediViewModel()
                 {
                     pacijent = pacijent,
@@ -374,7 +376,7 @@ namespace KBC.Controllers
                 return View(pregledi);
             }
         }
-        
+
         // [HttpPost]
         // [ValidateAntiForgeryToken]
         // public IActionResult Add(Pacijent pacijent)

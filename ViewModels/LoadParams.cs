@@ -1,14 +1,18 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace KBC.ViewModels {
+namespace KBC.ViewModels
+{
 
     /// <summary>
     /// Map lazy loading parameters
     /// </summary>
-    public class LoadParams {
+    public class LoadParams
+    {
 
         /// <summary>
         /// Starting row (i.e. skips First-1 rows)
@@ -43,14 +47,20 @@ namespace KBC.ViewModels {
         public bool Descending => !string.IsNullOrWhiteSpace(Sort) && Sort.EndsWith("DESC", StringComparison.OrdinalIgnoreCase);
 
         [BindNever]
-        public string SortColumn {
-            get {
+        public string SortColumn
+        {
+            get
+            {
                 string column = null;
-                if (!string.IsNullOrWhiteSpace(Sort)) {
+                if (!string.IsNullOrWhiteSpace(Sort))
+                {
                     int ind = Sort.IndexOf(' ');
-                    if (ind != -1) {
+                    if (ind != -1)
+                    {
                         column = Sort.Substring(0, ind);
-                    } else {
+                    }
+                    else
+                    {
                         column = Sort;
                     }
                 }

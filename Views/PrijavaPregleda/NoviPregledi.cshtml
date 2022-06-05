@@ -1,0 +1,36 @@
+@model IEnumerable<PrijavaInfo>
+
+<table class="table-striped table-bordered dashboard">
+    <h5>Svi pregledi</h5>
+    <thead>
+    <tr>
+        <th scope="col">PID</th>
+        <th scope="col">MBO</th>
+        <th scope="col">Datum pregleda</th>
+        <th scope="col">Doktor</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var info in Model)
+    {
+        <tr>
+            <td>@info.PID</td>
+            <td>@info.MBO</td>
+            <td>@info.DatumPregleda</td>
+            <td>
+                @if (info.MozeLiSePreuzeti)
+                {
+                    <form asp-action="@nameof(PrijavaPregledaController.PreuzmiPregled)" method="post">
+                        <input type="hidden" name="pid" value="@info.PID"/>
+                        <input type="submit" class="btn btn-primary btn-sm" value="Apply"/>
+                    </form>
+                }
+                else
+                {
+                    @info.Doktor
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
